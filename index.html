@@ -4,31 +4,35 @@
 	<meta charset="utf-8">
 	<script>
 		// TODO: create a handler
-		function setSearchEngine(){
+		function setSearchEngine() {
+			let actions = {
+ 			"google": "https://www.google.com/search",
+  			"duckDuckGo": "https://duckduckgo.com/",
+  			"bing": "https://www.bing.com/search",
+  			"ask": "https://www.ask.com/web"
+		};
 
-let actions = {
-  "google": "https://www.google.com/search",
-  "duckDuckGo": "https://duckduckgo.com/",
-  "bing": "https://www.bing.com/search",
-  "ask": "https://www.ask.com/web"
-};
+			let form = document.getElementById("searchForm");  
+			let selectedEngine = document.querySelector('input[name=engine]:checked');
+			let action = actions[selectedEngine.value];
+			alert("action is set to" + action);
+			form.setAttribute('action', action);
+		}
 
-let form = document.getElementById("searchForm");  
-const selectedEngine = document.querySelector('[name=engine]:checked');
-let action = actions[selectedEngine.value];
-alert("action is set to" + action);
-form.setAttribute('action', action);
-}
-
-    window.addEventListener("load", function(){
+    window.addEventListener("load", function() {
         // TODO: register the handler
-		let form = document.getElementById('searchForm'); 
-		
-		form.addEventListener('submit', setSearchEngine);
-			// let searchTerm = document.getElementsByName("query");
-			// if (searchTerm.type === "" || selectedEngine === "") {
-			// 	alert("Must enter a term to search and select a search engine!");
-			// }		  
+		let form = document.getElementById('searchForm');
+
+		form.addEventListener("submit", function(event) {
+			let searchTerm = document.querySelector("input[name=query]");
+			let radioCheck = document.getElementsByName('engine');
+			let checked = false;
+			if (searchTerm.value === "" || checked === false) {
+				alert("Must enter a term to search and select a search engine!");
+				// stop the form submission
+				event.preventDefault();
+			}
+		});		  
     });
 
 	</script>
@@ -39,7 +43,7 @@ form.setAttribute('action', action);
 	<form id="searchForm">
     <!-- TODO: add form elements -->
 	<form id="searchForm">	
-		<input name = "query" type="text" />
+		<input name ="query" type="text" />
 		<label> <input type = "radio" name="engine" value="google">Google</label>
 		<label> <input type = "radio" name="engine" value="duckDuckGo">DuckDuckGo</label>
 		<label> <input type = "radio" name="engine" value="bing">Bing</label>
@@ -51,8 +55,8 @@ form.setAttribute('action', action);
 </body>
 
 
-<!-- Bonus Missions
+ <!-- Bonus Missions
 
-Add validation to your submit handler to make sure that the user has both selected a search engine and entered a (non-empty) search term.
-Add some CSS rules to your page to make it look nice. -->
+// Add validation to your submit handler to make sure that the user has both selected a search engine and entered a (non-empty) search term.
+// Add some CSS rules to your page to make it look nice. -->
 
