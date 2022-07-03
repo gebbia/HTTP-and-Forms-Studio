@@ -27,10 +27,18 @@
 			let searchTerm = document.querySelector("input[name=query]");
 			let radioCheck = document.getElementsByName('engine');
 			let checked = false;
+			
+			for (let i = 0; i < radioCheck.length; i++) {
+				if (radioCheck[i].checked) {
+					checked = true;
+				}
+			};
+
 			if (searchTerm.value === "" || checked === false) {
 				alert("Must enter a term to search and select a search engine!");
 				// stop the form submission
 				event.preventDefault();
+				}else{ setSearchEngine();
 			}
 		});		  
     });
